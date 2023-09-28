@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 
 const movieData = {
@@ -86,6 +87,12 @@ export default function MovieDetails() {
 
   return (
     <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen">
+      <Link
+        href="/movies"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold mt-5 mb-0 ml-5 py-2 px-4 rounded-full transition-transform transform hover:scale-105 inline-block"
+      >
+        &lt; Back to Movies
+      </Link>
       {/* Movie Details */}
       <div className="container mx-auto py-8 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

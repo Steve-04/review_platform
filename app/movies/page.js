@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -25,6 +25,21 @@ const moviesData = [
 export default function Movies() {
   const router = useRouter();
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState(moviesData);
+
+  // Function to handle search input changes
+  const handleSearchInputChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filter movies based on the search query
+    const filtered = moviesData.filter((movie) =>
+      movie.title.toLowerCase().includes(query)
+    );
+    setFilteredMovies(filtered);
+  };
+
   return (
     <div className="bg-gradient-to-b from-gray-900 to-black h-screen">
       <div className="container mx-auto py-8 px-5">
@@ -37,10 +52,22 @@ export default function Movies() {
         <h1 className="text-4xl font-extrabold text-white mb-8">
           Explore Movies
         </h1>
+
+        {/* Search Bar */}
+        <div className="relative mb-7">
+          <input
+            type="text"
+            placeholder="Search for movies..."
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            className="w-full px-4 py-2 pl-10 pr-3 rounded-full bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:border-blue-500"
+          />
+        </div>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {moviesData.map((movie, index) => (
+          {filteredMovies.map((movie, index) => (
             <button
-              className="bg-gray-800 p-4 rounded-lg"
+              className="bg-gray-800 p-4 rounded-lg transition-transform transform hover:scale-105"
               onClick={() => router.push(`/movies/${index}`)}
             >
               <img
