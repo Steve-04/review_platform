@@ -28,6 +28,20 @@ export default function Movies() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredMovies, setFilteredMovies] = useState(moviesData);
 
+  // useEffect(() => {
+    
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8000/movies");
+  //       setFilteredMovies(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   // Function to handle search input changes
   const handleSearchInputChange = (e) => {
     const query = e.target.value.toLowerCase();
